@@ -1,6 +1,7 @@
 
 
 
+import React from "react";
 import Rewards from "./rewards";
 
 export const metadata = {

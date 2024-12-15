@@ -1,5 +1,6 @@
 
 
+import React from "react";
 import GiftCards from "./giftCards";
 
 export const metadata = {

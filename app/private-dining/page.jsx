@@ -1,5 +1,6 @@
 
 
+import React from "react";
 import PrivateDining from "./privateDining";
 
 export const metadata = {

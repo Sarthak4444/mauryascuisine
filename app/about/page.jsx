@@ -1,5 +1,8 @@
 
-import About from "./About";
+
+
+
+import About from "./about";
 
 export const metadata = {
   title: "About Us | Maurya's Rest, Bar & Banquet",

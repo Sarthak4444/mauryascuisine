@@ -37,6 +37,7 @@ function Careers() {
             className="lg:w-1/2 w-full ml-12 lg:ml-0 lg:mt-40 mt-10 p-5"
             alt="drink"
             width={500}
+            loading="lazy"
             height={600}
           />
           <Image
@@ -44,6 +45,7 @@ function Careers() {
             className="lg:w-1/2 w-full p-5 mr-12 lg:mr-0"
             alt="drink"
             width={500}
+            loading="lazy"
             height={600}
           />
         </div>

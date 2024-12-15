@@ -48,7 +48,7 @@ function SideMenu({ closeSideMenu }) {
         Make a Table Reservation
       </div>
       <div className="bg-black p-10 flex flex-col justify-center items-center gap-4">
-        <Image src={Logo} alt="Logo" width={150} height={150} />
+        <Image loading="lazy" src={Logo} alt="Logo" width={150} height={150} />
         <div
           className="flex flex-row
          gap-4 md:text-sm text-[10px]"

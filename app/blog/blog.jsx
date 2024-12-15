@@ -93,6 +93,7 @@ function Blog() {
                   alt="drink"
                   className="w-full h-[600px] object-cover p-10"
                   width={500}
+                  loading="lazy"
                   height={500}
                 />
               </div>
@@ -106,6 +107,7 @@ function Blog() {
                     className="w-full h-full object-cover p-10"
                     width={500}
                     height={500}
+                    loading="lazy"
                   />
                 </div>
                 <div className="w-full md:w-1/2 flex justify-center items-center flex-col gap-6">
@@ -151,6 +153,7 @@ function Blog() {
                     className="w-full h-full object-cover p-10"
                     width={500}
                     height={500}
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -165,6 +168,7 @@ function Blog() {
               className="w-full h-[500px] object-cover p-3 md:p-10 my-8"
               width={500}
               height={500}
+              loading="lazy"
             />
             <p className="text-xl font-semibold text-left tracking-wider pr-6 leading-10 text-neutral-600 mb-8">
               {blog.Content}
@@ -206,6 +210,7 @@ function Blog() {
                 <Image
                   src={item.Image}
                   alt="blog"
+                  loading="lazy"
                   className="w-[400px] h-[300px] object-cover p-6"
                   width={400}
                   height={300}

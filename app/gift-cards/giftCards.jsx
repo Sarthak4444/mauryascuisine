@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import FAQs from "@/components/FAQs";
+import drinkThree from "../../public/images/drinkThree.png";
 
 import Pattern from "../../public/images/Pattern.png";
 
@@ -34,7 +35,7 @@ function GiftCards() {
         <div className="flex justify-center items-center w-fit relative mx-auto mt-10">
           <Image
             className="rounded-2xl object-cover h-[150px] w-[250px] sm:h-[200px] sm:w-[300px] md:h-[300px] md:w-[500px]"
-            src="https://storage.googleapis.com/earls-ws-prod/filer_public_thumbnails/filer_public/2022/03/07/giftcards_960x720px_1.png__773x583_crop-smart_subsampling-2_upscale.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=earls-prod-storage%40earls-website.iam.gserviceaccount.com%2F20241214%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20241214T171834Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=bc904f718648c2ff5206616ab2225e49a78559dd22880eae8815e80e4f2e5bc377aa32113073b9a07e236342abe40bbd444ff200c04ea078b898cc70c1a459a7c22e303a86c0180d3a582091318310c56dd2eddf72985099e47ec3b0b8aafcaca6705c32b539a0d0b95c903a100d44380fdb873e65164c7bcbdfeb73a5d05d9bc2f1a756b237976d7c77f554d794d9192f05dd23f208e16c9f9cdf7448661091de34f9467ff3913a4880c781f27e6420ad6f3555f5411531d206091d5003452a2e4396cf53113a731e7be24f8a0b1f16f6314180329c77bc7905edd7e1243840f7c357362324165bfc651ecd68703c7feff37e389a975bfaece47e28ebd20cb4"
+            src={drinkThree}
             alt="drink"
             width={500}
             height={300}

@@ -74,7 +74,7 @@ function Header() {
       <div className="w-full flex justify-between items-center md:px-14 px-7 py-4 bg-black">
         <div>
           <Link href="/">
-          <Image src={Logo} alt="Logo" className="w-28 h-auto sm:w-36" />
+          <Image loading="lazy" src={Logo} alt="Logo" className="w-28 h-auto sm:w-36" />
           </Link>
         </div>
         <div className="lg:flex hidden">

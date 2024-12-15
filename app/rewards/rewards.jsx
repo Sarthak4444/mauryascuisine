@@ -86,6 +86,7 @@ function Rewards() {
               <Image
                 src={drinkTwo}
                 alt="drink"
+                loading="lazy"
                 width={300}
                 height={300}
                 className="md:w-[300px] md:h-[300px] w-[200px] h-[200px] object-cover"
@@ -96,6 +97,7 @@ function Rewards() {
                 alt="pattern"
                 width={300}
                 height={300}
+                loading="lazy"
               />
             </div>
           </div>
@@ -162,6 +164,7 @@ function Rewards() {
                 alt="Cake"
                 width={200}
                 height={200}
+                loading="lazy"
               />
             </div>
             <p className="text-lg font-semibold">Birthday Freebies</p>
@@ -177,6 +180,7 @@ function Rewards() {
                 alt="phone"
                 width={200}
                 height={200}
+                loading="lazy"
               />
             </div>
             <p className="text-lg font-semibold">Order & Pay ahead</p>
@@ -191,11 +195,11 @@ function Rewards() {
       <section className="h-fit max-w-[1250px] mx-auto p-16 pb-10 text-center">
         <div className="flex md:flex-row flex-col justify-center items-center md:gap-20 gap-12 my-10">
           <div>
-            <Image src="https://www.cactusclubcafe.com/wp-content/uploads/2024/10/110124_HolidayGC_GiftCardPageCells_750x500.png" alt="phone" width={300} height={300} />
+            <Image src="https://www.cactusclubcafe.com/wp-content/uploads/2024/10/110124_HolidayGC_GiftCardPageCells_750x500.png" alt="phone" width={300} height={300} loading="lazy"/>
         <p className="text-2xl text-[#d88728] text-center mt-6">DIGITAL GIFT CARDS</p>
           </div>
           <div>
-            <Image src="https://www.cactusclubcafe.com/wp-content/uploads/2024/10/110124_HolidayGC_GiftCardPageCells_750x500-04.png" alt="phone" width={300} height={300} />
+            <Image src="https://www.cactusclubcafe.com/wp-content/uploads/2024/10/110124_HolidayGC_GiftCardPageCells_750x500-04.png" alt="phone" width={300} height={300} loading="lazy"/>
         <button className="bg-[#d88728] mt-6 hover:scale-105 transition-all duration-500 text-white px-8 text-xl font-extrabold tracking-wider py-2">CHECK BALANCE</button></div>
         </div>
       </section>

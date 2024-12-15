@@ -11,6 +11,7 @@ function Subscribe({ closeSubscribe }) {
             src={drinkThree}
             alt="Subscribe"
             width={500}
+            loading="lazy"
             height={500}
           />
         </div>

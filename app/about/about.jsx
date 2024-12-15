@@ -71,6 +71,7 @@ function About() {
               alt={person.Title}
               width={500}
               height={500}
+              loading="lazy"
               className="w-full h-full p-8"
             />
           </div>
@@ -83,6 +84,7 @@ function About() {
               alt="drink"
               width={500}
               height={500}
+              loading="lazy"
               className="w-full h-[500px] object-cover p-3 md:p-14"
             />
         <Image
@@ -90,6 +92,7 @@ function About() {
               alt="drink"
               width={500}
               height={500}
+              loading="lazy"
               className="w-full h-full p-3 md:p-14"
             />
             <div className="flex flex-col justify-center items-center gap-3">
@@ -103,6 +106,7 @@ function About() {
               src={ButterChicken}
               alt="drink"
               width={500}
+              loading="lazy"
               height={500}
               className="w-full h-full p-3 md:p-14"
             />
@@ -111,6 +115,7 @@ function About() {
               alt="drink"
               width={500}
               height={500}
+              loading="lazy"
               className="w-full h-[500px] object-cover p-3 md:p-14"
             />
         </div>

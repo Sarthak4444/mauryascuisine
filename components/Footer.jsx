@@ -60,7 +60,7 @@ function Footer() {
             </div>
           </div>
           <div className="flex md:flex-row flex-col gap-7 mt-10 justify-center items-center">
-            <Image src={Pattern} alt="Pattern" width={200} height={200} />
+            <Image src={Pattern} alt="Pattern" loading="lazy" width={200} height={200} />
             <div className="flex flex-col gap-4">
               <p className="font-semibold text-lg text-red-600">
                 SIGNUP FOR OUR NEWSLETTER

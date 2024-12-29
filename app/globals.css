@@ -112,3 +112,33 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+  height: 10px; /* Height of the scrollbar (for horizontal scrolling) */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d88728; /* Thumb color with a gradient */
+  border-radius: 5px; /* Round edges for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #995f1c; /* Hover effect for the thumb */
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Background color of the track */
+  border-radius: 5px; /* Match the thumb radius */
+}
+
+::-webkit-scrollbar-track:hover {
+  background: #2a2a2a; /* Hover effect for the track */
+}
+
+/* Optional: Styling for Firefox */
+* {
+  scrollbar-width: thin; /* Use a thin scrollbar */
+  scrollbar-color: #4a4a4a #1a1a1a; /* Thumb and track colors */
+}

@@ -2,12 +2,14 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Maps from "@/components/Maps";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata = {
   title: "Maurya's Rest, Bar & Banquet",
   description:
     "Welcome to Maurya's Rest, Bar & Banquet, where exquisite flavors meet exceptional ambiance. Explore our menu, reserve a table, and enjoy an unforgettable dining experience.",
-  keywords: "restaurant, dining, fine dining, family dining, best restaurant, Maurya's, food and drinks, table reservations",
+  keywords:
+    "restaurant, dining, fine dining, family dining, best restaurant, Maurya's, food and drinks, table reservations",
   openGraph: {
     title: "Maurya's Rest, Bar & Banquet",
     description:
@@ -30,13 +32,15 @@ export const metadata = {
     title: "Welcome to Maurya's Rest, Bar & Banquet | Best Dining Experience",
     description:
       "Discover the best dining experience at Maurya's Rest, Bar & Banquet. Exceptional food, cozy ambiance, and great service await you.",
-    images: ["https://www.cactusclubcafe.com/wp-content/uploads/2024/11/HPCarousel_600x600_RedThaiCurry.jpg"],
+    images: [
+      "https://www.cactusclubcafe.com/wp-content/uploads/2024/11/HPCarousel_600x600_RedThaiCurry.jpg",
+    ],
   },
 };
 
-
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
     <html lang="en">
       <head>
         <link
@@ -46,7 +50,10 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        <script type="module" src="https://widgets.revue.us/2.0/rw-widget-grid.js"></script>
+        <script
+          type="module"
+          src="https://widgets.revue.us/2.0/rw-widget-grid.js"
+        ></script>
       </head>
 
       <body>
@@ -56,5 +63,6 @@ export default function RootLayout({ children }) {
         <Footer />
       </body>
     </html>
+    </ClerkProvider>
   );
 }

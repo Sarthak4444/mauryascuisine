@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import drinkThree from "../public/images/drinkThree.png";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 function Subscribe({ closeSubscribe }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="fixed inset-0 bg-[#00000096] flex justify-center items-center z-50">
       <div className="bg-white flex flex-row justify-center items-center w-[800px] relative">
@@ -32,21 +38,26 @@ function Subscribe({ closeSubscribe }) {
               type="text"
               required
               placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               className="p-2 w-[250px] border-[1px] focus:outline-none border-gray-300 text-gray-800 rounded-md text-lg font-semibold"
               type="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
             />
             <hr className="h-[2px] w-[250px] bg-[#c7b8a7]" />
-            <button
+            <Button
               className="bg-[#d88728] w-[250px] rounded-sm hover:scale-105 transition-all duration-500 text-white p-2 text-center text-xl font-bold"
-         
               type="submit"
+              disabled={loading}
             >
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Subscribe
-            </button>
+            </Button>
           </form>
           <p className="text-sm text-neutral-500 mt-4 leading-4">
             By providing your name and email, you agree to our Terms of Use and

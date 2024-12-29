@@ -44,7 +44,7 @@ function Maps() {
                     </p>
                   </div>
                   <div>
-                    <a target="_blank" href="https://www.google.com/search?sa=X&sca_esv=dabdc9c3aed4aa80&biw=1366&bih=679&sxsrf=ADLYWILI6Ie7G3Lmo9jrrdUqcmH7V49xgg:1733768494889&q=maurya%27s+rest.bar.banquet+hours&ludocid=233481353164456671&ved=2ahUKEwiEzIr6ppuKAxWLCjQIHeXsF4AQ6BN6BAhHEBY">
+                   <a target="_blank" href="https://www.google.com/search?sa=X&sca_esv=dabdc9c3aed4aa80&biw=1366&bih=679&sxsrf=ADLYWILI6Ie7G3Lmo9jrrdUqcmH7V49xgg:1733768494889&q=maurya%27s+rest.bar.banquet+hours&ludocid=233481353164456671&ved=2ahUKEwiEzIr6ppuKAxWLCjQIHeXsF4AQ6BN6BAhHEBY">
                       <p className="text-[17px] text-[#686868] font-semibold">
                         See hours <i className="fa-regular fa-clock"></i>
                       </p>

@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../public/images/Logo.png";
-import LetterM from "../public/images/LetterM.png";
+import LetterM from "../public/images/LetterM.jpg";
 import { usePathname } from "next/navigation";
 
 function SideMenu() {

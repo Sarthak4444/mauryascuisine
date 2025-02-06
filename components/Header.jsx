@@ -6,11 +6,39 @@ import Link from "next/link";
 import { useState } from "react";
 import SideMenu from "./Reserve_Table_Modals/SideMenu";
 import OrderNow from "./OrderNow";
+import { BiLoaderAlt } from "react-icons/bi";
+import { useAuth } from "./../hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isOrderNowOpen, setIsOrderNowOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const { user, loading } = useAuth();
+
+  const handleLogout = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/logout", {
+        method: "GET",
+      });
+
+      if (res.ok) {
+        setIsLoading(false);
+        window.location.reload(true);
+        router.push("/");
+      } else {
+        setIsLoading(false);
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Error logging out:", error);
+    }
+  };
 
   const toggleOrderNow = () => {
     setIsOrderNowOpen(!isOrderNowOpen);
@@ -51,7 +79,7 @@ function Header() {
       </div>
 
       {/* Address and phone */}
-      <div className="w-full flex bg-white md:gap-10 gap-4 justify-end md:px-10 px-4 py-2 md:text-sm text-[10px]">
+      <div className="w-full flex bg-white md:gap-10 gap-4 justify-end md:px-[60px] px-4 py-2 md:text-sm text-[10px]">
         <span>
           <i className="fa-solid fa-location-dot text-[#d88728]"></i>
           &nbsp;
@@ -68,19 +96,37 @@ function Header() {
           &nbsp;
           <a href="tel:2503774969">250 377 4969</a>
         </span>
+        <span>
+          <i className="fa-solid fa-user text-[#d88728]"></i>
+          &nbsp;
+          {loading || isLoading ? (
+            <BiLoaderAlt className="animate-spin inline-block w-4 h-4 mb-[2px]" />
+          ) : !user ? (
+            <Link href="/login">Login</Link>
+          ) : (
+            <button onClick={handleLogout}>Logout</button>
+          )}
+        </span>
       </div>
 
       {/* Logo and Nav */}
       <div className="w-full flex justify-between items-center md:px-14 px-7 py-4 bg-black">
         <div>
           <Link href="/">
-          <Image loading="lazy" src={Logo} alt="Logo" className="w-28 h-auto sm:w-36" />
+            <Image
+              loading="lazy"
+              src={Logo}
+              alt="Logo"
+              className="w-28 h-auto sm:w-36"
+            />
           </Link>
         </div>
         <div className="lg:flex hidden">
           <ul className="flex gap-10 text-white text-[15px] font-semibold">
             <li>
-              <Link href="https://order.online/store/maurya's-rest.bar.banquet-kamloops-671165/?hideModal=true&pickup=true">MENU</Link>
+              <Link href="https://order.online/store/maurya's-rest.bar.banquet-kamloops-671165/?hideModal=true&pickup=true">
+                MENU
+              </Link>
             </li>
             <li>
               <Link href="/gift-cards">GIFT CARDS</Link>
@@ -100,7 +146,10 @@ function Header() {
           >
             BOOk A TABLE
           </button>
-          <button onClick={toggleOrderNow} className="bg-black p-4 px-10 font-semibold border-[1px] border-[#d88728] text-white hover:bg-[#d88728] transition-all duration-400">
+          <button
+            onClick={toggleOrderNow}
+            className="bg-black p-4 px-10 font-semibold border-[1px] border-[#d88728] text-white hover:bg-[#d88728] transition-all duration-400"
+          >
             ORDER NOW
           </button>
         </div>
@@ -126,13 +175,19 @@ function Header() {
             <p className="hover:cursor-pointer">MENU</p>
           </li>
           <li>
-            <Link onClick={toggleMenu} href="/gift-cards">GIFT CARDS</Link>
+            <Link onClick={toggleMenu} href="/gift-cards">
+              GIFT CARDS
+            </Link>
           </li>
           <li>
-            <Link onClick={toggleMenu} href="/rewards">REWARDS</Link>
+            <Link onClick={toggleMenu} href="/rewards">
+              REWARDS
+            </Link>
           </li>
           <li>
-            <Link onClick={toggleMenu} href="/private-dining">PRIVATE DINING</Link>
+            <Link onClick={toggleMenu} href="/private-dining">
+              PRIVATE DINING
+            </Link>
           </li>
           <li>
             <button
@@ -143,7 +198,10 @@ function Header() {
             </button>
           </li>
           <li>
-            <button onClick={toggleOrderNow} className="bg-black p-4 px-10 font-semibold border-[1px] border-[#d88728] text-white hover:bg-[#d88728] transition-all duration-400">
+            <button
+              onClick={toggleOrderNow}
+              className="bg-black p-4 px-10 font-semibold border-[1px] border-[#d88728] text-white hover:bg-[#d88728] transition-all duration-400"
+            >
               Order Now
             </button>
           </li>
@@ -179,7 +237,10 @@ function Header() {
         >
           Book a Table
         </button>
-        <button onClick={toggleOrderNow} className="p-3 px-8 font-semibold text-white bg-[#f59629f1] transition-all duration-1000">
+        <button
+          onClick={toggleOrderNow}
+          className="p-3 px-8 font-semibold text-white bg-[#f59629f1] transition-all duration-1000"
+        >
           Order Now
         </button>
       </div>

@@ -1,13 +1,59 @@
 "use client";
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { useAuth } from "./../../hooks/useAuth";
+import ThankYou from "./ThankYou";
+import Password from "./Password";
 
-function Details({ numberOfPeople, date, time }) {
+function Details({ numberOfPeople, date, time, closeDetails }) {
   const [seconds, setSeconds] = useState(300);
+  const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { user, loading } = useAuth();
+  const [isThankYou, setIsThankYou] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
-  console.log(numberOfPeople, date, time);
+  const logUser = () => {
+    setIsLogged(true);
+  };
+
+  const closeThankYou = () => {
+    setIsThankYou(false);
+  };
+
+  const closePassword = () => {
+    setIsPassword(false);
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user && user.email) {
+        try {
+          const response = await fetch("/api/user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: user.email }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch user data");
+          }
+
+          const data = await response.json();
+          setUserData(data.user);
+        } catch (err) {
+          setError(err.message);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -26,15 +72,25 @@ function Details({ numberOfPeople, date, time }) {
   }, [seconds]);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+    name: userData?.name || "",
+    email: userData?.email || "",
+    phone: userData?.number || "",
     occasion: "",
     note: "",
     info1: false,
     info2: false,
   });
+
+  useEffect(() => {
+    if (userData) {
+      setFormData((prevData) => ({
+        ...prevData,
+        name: userData.name || "",
+        email: userData.email || "",
+        phone: userData.number || "",
+      }));
+    }
+  }, [userData]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,12 +100,89 @@ function Details({ numberOfPeople, date, time }) {
     }));
   };
 
+  const handleReservation = async () => {
+    const data = {
+      email: formData.email,
+      number: formData.phone,
+      name: formData.name,
+      occasion: formData.occasion,
+      note: formData.note,
+      people: numberOfPeople,
+      date: date,
+      time: time,
+    };
+    try {
+      const response = await fetch("/api/privatereservation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setError(result.error || "An unexpected error occurred.");
+      } else {
+        setIsThankYou(true);
+      }
+    } catch (err) {
+      setError("Failed to connect to the server. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isLogged) {
+      handleReservation();
+    }
+  }, [isLogged]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    if (user) {
+      await handleReservation();
+    } else {
+      setIsPassword(true);
+      setIsLoading(false);
+    }
+  };
+
+  
+
   return (
     <div className="fixed inset-0 bg-[#00000096] flex justify-center items-center z-50">
-      <div className="bg-white text-black p-6 rounded-sm">
+      {isThankYou && (
+        <ThankYou
+          closeDetails={closeDetails}
+          closeThankYou={closeThankYou}
+          people={numberOfPeople}
+          date={date}
+          time={time}
+        />
+      )}
+      {isPassword && (
+        <Password
+          closePassword={closePassword}
+          email={formData.email}
+          number={formData.phone}
+          name={formData.name}
+          logUser={logUser}
+        />
+      )}
+      <div className="bg-white text-black p-6 rounded-sm relative">
+        <i
+          onClick={closeDetails}
+          className="fa-solid fa-xmark text-xl absolute top-[5px] right-[5px] cursor-pointer"
+        ></i>
         {seconds > 0 ? (
           <div
-            className={`p-1  text-base text-center text-black bg-[#6e95ff] ${
+            className={`p-1 px-3 text-base text-center text-black bg-[#6e95ff] ${
               seconds <= 60 && seconds > 30 ? "bg-[#ffd95d]" : ""
             } ${seconds <= 30 ? "bg-[#ff8282]" : ""}`}
           >
@@ -67,26 +200,15 @@ function Details({ numberOfPeople, date, time }) {
           YOUR DETAILS
         </p>
         <div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-2 md:gap-4">
               <div>
                 <div className="mb-2">
                   <input
-                    name="firstName"
-                    placeholder="First Name"
+                    name="name"
+                    placeholder="Name"
                     type="text"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="p-2 w-full border-[1px] border-gray-300 rounded-md text-lg font-semibold"
-                    required
-                  />
-                </div>
-                <div className="mb-2">
-                  <input
-                    name="lastName"
-                    placeholder="Last Name"
-                    type="text"
-                    value={formData.lastName}
+                    value={formData.name}
                     onChange={handleChange}
                     className="p-2 w-full border-[1px] border-gray-300 rounded-md text-lg font-semibold"
                     required
@@ -141,12 +263,12 @@ function Details({ numberOfPeople, date, time }) {
               </div>
               <div className="p-2 text-neutral-700">
                 <p className="text-lg font-semibold mb-2">
-                  <i className="fa-solid fa-users mr-2"></i>
+                  <i className="fa-solid fa-users mr-2 text-base"></i>
                   {numberOfPeople}
                   <span className="font-bold"> People</span>
                 </p>
                 <p className="text-lg font-semibold mb-2">
-                  <i className="fa-regular fa-calendar mr-2"></i>
+                  <i className="fa-regular fa-calendar mr-2 text-xl"></i>
                   {date instanceof Date
                     ? date.toLocaleDateString("en-US", {
                         weekday: "long",
@@ -193,12 +315,20 @@ function Details({ numberOfPeople, date, time }) {
                 </span>
               </label>
             </div>
+              {error && <p className="text-red-500 -mb-2 text-center">{error}</p>}
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-[#d88728] rounded-sm hover:scale-105 transition-all duration-500 text-white p-2 px-8 text-center text-xl font-bold mt-4"
+                disabled={isLoading}
+                className={` ${
+                  isLoading ? "bg-gray-500" : "bg-[#d88728] hover:scale-105"
+                } rounded-sm transition-all duration-500 text-white p-2 px-8 text-center text-xl font-bold mt-4`}
               >
-                Confirm Reservation
+                {isLoading ? (
+                  <div className="loader"></div>
+                ) : (
+                  "Confirm Reservation"
+                )}
               </button>
             </div>
           </form>

@@ -37,9 +37,20 @@ function SideMenu({ closeSideMenu }) {
     setIsDetailsOpen(true);
   };
 
+  const closeDetails = () => {
+    setIsDetailsOpen(false);
+  };
+
   return (
     <div className="h-screen bg-[#00000096] relative text-white md:w-[500px] w-screen">
-      {isDetailsOpen && <Details numberOfPeople={numberOfPeople} date={date} time={time} />}
+      {isDetailsOpen && (
+        <Details
+          numberOfPeople={numberOfPeople}
+          date={date}
+          time={time}
+          closeDetails={closeDetails}
+        />
+      )}
       <i
         onClick={closeSideMenu}
         className="fa-solid fa-xmark text-xl absolute top-5 right-5 cursor-pointer"
@@ -79,7 +90,11 @@ function SideMenu({ closeSideMenu }) {
           </SelectTrigger>
           <SelectContent>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((num) => (
-              <SelectItem className="text-black" value={num.toString()} key={num}>
+              <SelectItem
+                className="text-black"
+                value={num.toString()}
+                key={num}
+              >
                 <p className="text-black">Table for {num} people</p>
               </SelectItem>
             ))}
@@ -115,7 +130,11 @@ function SideMenu({ closeSideMenu }) {
           </SelectTrigger>
           <SelectContent>
             {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-              <SelectItem className="text-black" value={num.toString()} key={num}>
+              <SelectItem
+                className="text-black"
+                value={num.toString()}
+                key={num}
+              >
                 <p className="text-black">{num} PM</p>
               </SelectItem>
             ))}

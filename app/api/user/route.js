@@ -1,37 +1,26 @@
-import dbConnect from "@/lib/dbConnect";
-import User from "@/models/User";
+import dbConnect from "./../../../lib/dbConnect";
+import User from "./../../../models/User";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  try {
-    await dbConnect();
-    const { email, number } = await req.json();
+    try {
+        await dbConnect();
 
-    let user = await User.findOne({ email });
+        const body = await req.json(); 
+        const { email } = body;
 
-    if (user) {
-      user.number = number || user.number;
-      await user.save();
-      const response = NextResponse.json({
-        message: "User updated successfully",
-        user,
-      });
-      return setHeaders(response);
-    } else {
-      const newUser = new User({ email, number });
-      await newUser.save();
-      const response = NextResponse.json({
-        message: "User created successfully",
-        newUser,
-      });
-      return setHeaders(response);
+        if (!email) {
+            return NextResponse.json({ error: "Email is required" }, { status: 400 });
+        }
+
+        const user = await User.findOne({ email }).select('-password');
+        if (!user) {
+            return NextResponse.json({ error: "User does not exist" }, { status: 404 });
+        }
+
+        return NextResponse.json({ user }, { status: 200 });
+    } catch (error) {
+        console.error("Error fetching user:", error.message || error);
+        return NextResponse.json({ error: "Error fetching user" }, { status: 500 });
     }
-  } catch (error) {
-    console.error("Error processing user request:", error);
-    const response = NextResponse.json(
-      { error: "Error processing user request" },
-      { status: 500 }
-    );
-    return setHeaders(response);
-  }
 }

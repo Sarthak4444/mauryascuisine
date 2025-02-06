@@ -1,4 +1,3 @@
-// next.config.mjs
 
 export const nextConfig = {
     reactStrictMode: true,

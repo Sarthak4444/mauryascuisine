@@ -38,6 +38,7 @@ function SideMenu() {
         <Image
           className="filter invert"
           loading="lazy"
+          unoptimized
           src={LetterM}
           alt="Logo"
           width={30}
